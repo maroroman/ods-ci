@@ -22,6 +22,7 @@ Select Container Size
    [Documentation]  Selects the container size based on the ${container_size} argument
    [Arguments]  ${container_size}
    # Expand List
+   Wait Until Page Contains    Container size   timeout=30   error=Container size selector is not present in JupyterHub Spawner
    Click Element  xpath:/html/body/div[1]/form/div/div/div[3]/div[3]/button
    Click Element  xpath://span[.="${container_size}"]/../..
 
@@ -180,6 +181,18 @@ User Is Allowed
    JupyterHub Spawner is Visible
    Page Should Not Contain  403 : Forbidden
    Wait Until Page Contains Element  xpath:/html/body/div[1]/form/div/div/div[2]
+
+User Is Not Allowed
+   JupyterHub Spawner is Visible
+   Page Should Contain  403 : Forbidden
+
+User Is JupyterHub Admin
+   JupyterHub Spawner is Visible
+   Page Should Contain  Admin
+
+User Is Not JupyterHub Admin
+   JupyterHub Spawner is Visible
+   Page Should Not Contain  Admin
 
 Logout Via Button
    Click Element  xpath://a[@id='logout']
